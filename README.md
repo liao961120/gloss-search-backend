@@ -1,4 +1,4 @@
-# corpus_processor
+# gloss-search-backend
 
 ## 專案目的
 
@@ -9,7 +9,7 @@
 
 ## 使用
 
-下方有兩種使用方式：Python 3 或是 Docker。Python 3 在每次使用時會比較麻煩；Docker 在使用上方便許多，但某些電腦可能會因軟硬體不支援而無法安裝。
+下方有兩種使用方式：[Python 3](#python-3) 或是 [Docker](#docker)。Python 3 在每次使用時會比較麻煩；Docker 在使用上方便許多，但某些電腦可能會因軟硬體不支援而無法安裝。
 
 ### Python 3
 
@@ -27,9 +27,9 @@
 1. 將語料放置於此資料夾內的 `corp/`
     
     ```
-    corpus_processor-master/      # uncompressed root folder
+    corpus_processor-master/    # uncompressed root folder
     │
-    ├── corp                      # put glossing docx here
+    ├── corp/                   # put glossing docx here
     │   ├── 20200318.docx
     │   ├── 20200325.docx
     │   └── 20200408-test.docx
