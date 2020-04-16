@@ -4,16 +4,68 @@
 
 這個專案主要是方便於處理語言田野調查課程所採集的檔案。這學期我們請了霧台魯凱語的族語老師，並將每個禮拜採集的語料整理成一個 `.docx` 檔。
 
+此專案承接 [`puerdon/corpus_processor`](https://github.com/puerdon/corpus_processor)，將原本的實作從 Jupyter Notebook 擴充成 Web App。
+
 
 ## 使用
 
-### Python
+下方有兩種使用方式：Python 3 或是 Docker。Python 3 在每次使用時會比較麻煩；Docker 在使用上方便許多，但某些電腦可能會因軟硬體不支援而無法安裝。
+
+### Python 3
 
 1. (第一次使用時) 安裝 [Python 3](https://www.python.org/downloads/) (3.7 以上)
-1. (第一次使用時) [下載](https://github.com/liao961120/corpus_processor/archive/master.zip)並解壓 `corpus_processor-master.zip`
-1. 將語料放置於
-1. 開啟 Terminal (e.g. `Powershell`, `命令提示字元`)
 
+1. (第一次使用時) [下載](https://github.com/liao961120/corpus_processor/archive/master.zip)並解壓 `corpus_processor-master.zip`
+
+1. (第一次使用時) 開啟 Terminal (e.g. `命令提示字元`)，更換工作目錄至 `corpus_processor-master/`，並執行
+
+    ```bash
+    # cd /path/to/corpus_processor-master/
+    pip install -r requirements.txt
+    ```
+
+1. 將語料放置於此資料夾內的 `corp/`
+    
+    ```
+    corpus_processor-master/      # uncompressed root folder
+    │
+    ├── corp                      # put glossing docx here
+    │   ├── 20200318.docx
+    │   ├── 20200325.docx
+    │   └── 20200408-test.docx
+    │
+    ├── corpus_processor.ipynb
+    ├── Dockerfile
+    ├── GlossProcessor.py
+    ├── README.md
+    ├── requirements.txt
+    └── server.py
+    ```
+
+1. 開啟 Terminal，更換工作目錄至 `corpus_processor-master/`
+
+    ```bash
+    cd /path/to/corpus_processor-master/
+    ```
+
+1. 執行程式
+
+    ```bash
+    python server.py  # or python3 server.py
+    ```
+
+1. 前往 <https://glosss.yongfu.name> 查詢語料
+
+    - 勾選 `Gloss`: 搜尋 interlinear gloss (e.g. 族語, `主格`, `OBJ` 等)
+        - 支援 RegEx 搜尋
+    - 勾選 `Notes`: 搜尋 `#e`, `#c`, 與 `#n` 的內容
+    - 若要尋找**同時含有**多項內容時，使用 `,` 分隔搜尋內容。例如，想搜尋同時包含 `主格`, `ki` 以及 `Takanaw` 的語料，可輸入：
+        
+        ```
+        主格,ki,Takanaw
+        ```
+
+    ![](https://img.yongfu.name/gif/gloss-search.gif)
 
 
 ### Docker
@@ -57,6 +109,8 @@
         ```
         主格,ki,Takanaw
         ```
+    
+    ![](https://img.yongfu.name/gif/gloss-search.gif)
 
 
 ## 語料檔範例
