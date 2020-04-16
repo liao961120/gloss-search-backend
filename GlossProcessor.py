@@ -56,7 +56,7 @@ class GlossProcessor:
                 try:
                     glosses = process_doc(os.path.join(path, filename))
                 except:
-                    print(f"Invalid formatting in docx: `{filname}`")
+                    print(f"Invalid formatting in docx: `{filename}`")
                     continue
                 self.data[filename] = tokenize_glosses(glosses, filename)
 

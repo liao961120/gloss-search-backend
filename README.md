@@ -1,15 +1,27 @@
 # corpus_processor
 
 ## 專案目的
+
 這個專案主要是方便於處理語言田野調查課程所採集的檔案。這學期我們請了霧台魯凱語的族語老師，並將每個禮拜採集的語料整理成一個 `.docx` 檔。
 
 
 ## 使用
 
-1. (第一次使用時) 在電腦安裝 [docker](https://www.docker.com/products/docker-desktop)  
-(之後的步驟皆需使用 Terminal, e.g. `Powershell` 或`命令提示字元`)
+### Python
 
-1. (第一次使用時) 下載 docker image
+1. (第一次使用時) 安裝 [Python 3](https://www.python.org/downloads/) (3.7 以上)
+1. (第一次使用時) [下載](https://github.com/liao961120/corpus_processor/archive/master.zip)並解壓 `corpus_processor-master.zip`
+1. 將語料放置於
+1. 開啟 Terminal (e.g. `Powershell`, `命令提示字元`)
+
+
+
+### Docker
+
+1. (第一次使用時) 安裝 [Docker Desktop](https://www.docker.com/products/docker-desktop)  
+    **請注意電腦硬體及作業系統需求**
+
+1. (第一次使用時) 開啟 Terminal (e.g. `Powershell`, `命令提示字元`) 下載 docker image
 
     ```bash
     docker pull liao961120/gloss-search
@@ -48,6 +60,7 @@
 
 
 ## 語料檔範例
+
 ```
 1.
 ma-tas=sami         su     tigami     ni     Payan    babay   i    Laway
