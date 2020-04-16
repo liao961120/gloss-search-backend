@@ -1,0 +1,10 @@
+.git
+__pycache__
+.ipynb_checkpoints
+corp
+*.ipynb
+
+.travis.yml
+*Dockerfile*
+README.md
+LICENSE.txt

@@ -1,7 +1,51 @@
 # corpus_processor
 
 ## 專案目的
-這個專案主要是方便於處理語言田野調查課程所採集的檔案。這學期我們請了汶水泰雅語的族語老師，並將每個禮拜採集的語料整理成一個`.docx`檔。
+這個專案主要是方便於處理語言田野調查課程所採集的檔案。這學期我們請了霧台魯凱語的族語老師，並將每個禮拜採集的語料整理成一個 `.docx` 檔。
+
+
+## 使用
+
+1. (第一次使用時) 在電腦安裝 [docker](https://www.docker.com/products/docker-desktop)  
+(之後的步驟皆需使用 Terminal, e.g. `Powershell` 或`命令提示字元`)
+
+1. (第一次使用時) 下載 docker image
+
+    ```bash
+    docker pull liao961120/gloss-search
+    ```
+
+1. 更換工作目錄至 `*.docx` 檔案所在之資料夾
+
+    ```bash
+    # Change working dir to the folder where you put your glossing files (.docx)
+    cd path/to/glossing/glossing/folder
+    ```
+
+1. 執行 docker image `liao961120/gloss-search` (注意作業系統)
+
+    ```bash
+    # Unix-like bash: cd to `corp/` and run:
+    docker container run -it -p 127.0.0.1:1420:80 -v $(pwd):/usr/src/app/corp/ liao961120/gloss-search
+
+    # Windows cmd: cd to `corp/` and run
+    docker container run -it -p 127.0.0.1:1420:80 -v %cd%:/usr/src/app/corp/ liao961120/gloss-search
+
+    # Windows PowerShell: cd to `corp/` and run
+    docker container run -it -p 127.0.0.1:1420:80 -v ${PWD}:/usr/src/app/corp/ liao961120/gloss-search
+    ```
+
+1. 前往 <https://glosss.yongfu.name> 查詢語料
+
+    - 勾選 `Gloss`: 搜尋 interlinear gloss (e.g. 族語, `主格`, `OBJ` 等)
+        - 支援 RegEx 搜尋
+    - 勾選 `Notes`: 搜尋 `#e`, `#c`, 與 `#n` 的內容
+    - 若要尋找**同時含有**多項內容時，使用 `,` 分隔搜尋內容。例如，想搜尋同時包含 `主格`, `ki` 以及 `Takanaw` 的語料，可輸入：
+        
+        ```
+        主格,ki,Takanaw
+        ```
+
 
 ## 語料檔範例
 ```
@@ -35,33 +79,4 @@ CF-VBL-song=1SG.GEN      NOM    mother
 #c [中文翻譯]
 #n [註釋]
 [空行]
-```
-
-## `.ipynb`檔使用方式
-### Step 1
-先將專案clone至自己的電腦中
-```
-$ git clone https://github.com/puerdon/corpus_processor.git
-```
-
-### Step 2
-啟動電腦中的`jupyter`伺服器（前提是電腦裡已事先安裝`jupyter`）
-```
-$ jupyter notebook
-```
-
-### Step 3
-進瀏覽器中的`jupyter`中開啟路徑底下的`corpus_processor.ipynb`
-
-### Step 4
-開一個新的cell，呼叫`search`函數，`search`函數接收兩個參數，第一個參數(字串)為語料`.docx`檔所在路徑，第二個參數為欲搜尋的字串，可以使用regex。
-
-```python
-# 假設我的語料都在 /user/Don/corpus
-# 假設我想搜尋所有標有LOC或NOM的語料
-# 我就可以呼叫下列函數:
-search("/user/Don/corpus", "(NOM|LOC)")
-
-# 當然我也可以直接搜尋某個中文字串
-search("/user/Don/corpus", "給")
 ```
