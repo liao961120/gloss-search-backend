@@ -1,10 +1,13 @@
 import os
 import json
 import falcon
+import logging
 from falcon_cors import CORS
 from GlossProcessor import GlossProcessor
 from GlossProcessor import get_files_timestamp
 
+
+logging.basicConfig(format='\n[GLOSS-SEARCH]:  %(message)s\n', datefmt='%Y/%m/%d %I:%M:%S', level=logging.INFO)
 
 # Initialize corpus
 DOCX_PATH = './corp'
@@ -22,7 +25,7 @@ class Query(object):
         file_timestamps = get_files_timestamp(DOCX_PATH)
         for fn, time in file_timestamps.items():
             if fn not in FILE_TIMESTAMPS or time != FILE_TIMESTAMPS[fn]:
-                print(f"File change detected (`{os.path.basename(fn)}`), reload corpus!")
+                logging.warning(f"File change detected (`{os.path.basename(fn)}`), reload corpus!")
                 C = GlossProcessor(docs_folder_path=DOCX_PATH)   # Reload corpus
                 FILE_TIMESTAMPS = file_timestamps                # Update timestamps
                 break
@@ -38,7 +41,7 @@ class Query(object):
         params['regex'] = int(params['regex'])
 
         ############ DEBUGGING ##############
-        print("Recieved request!!!")
+        logging.debug("Recieved request!!!")
         ############ _DEBUGGING ##############
         
         # Search corpus
@@ -48,7 +51,7 @@ class Query(object):
             results = C.search_free(tokens=params['query'])
         
         ############ DEBUGGING ##############
-        print("Sending response...")
+        logging.debug("Sending response...")
         ############ _DEBUGGING ##############
 
         # Response to frontend
@@ -56,7 +59,7 @@ class Query(object):
         resp.body = json.dumps(results, ensure_ascii=False)
         
         ############ DEBUGGING ##############
-        print("Response sent !!!")
+        logging.debug("Response sent !!!")
         ############ _DEBUGGING ##############
    
 
@@ -75,6 +78,8 @@ app.add_route('/query', searchGloss)
 
 if __name__ == '__main__':
     from wsgiref import simple_server
+
+    logging.basicConfig(format='\n[GLOSS-SEARCH]:  %(message)s\n', datefmt='%Y/%m/%d %I:%M:%S', level=logging.INFO)
 
     port = 1420
     print(f"Start serving at http://localhost:{port}")
