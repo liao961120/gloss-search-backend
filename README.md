@@ -65,7 +65,7 @@
         主格,ki,Takanaw
         ```
 
-    ![Demo](https://img.yongfu.name/gif/gloss-search.gif)
+    ![Demo](https://img.yongfu.name/gif/gloss-search-min.gif)
 
 
 ### Docker
@@ -110,7 +110,7 @@
         主格,ki,Takanaw
         ```
     
-    ![Demo](https://img.yongfu.name/gif/gloss-search.gif)
+    ![Demo](https://img.yongfu.name/gif/gloss-search-min.gif)
 
 
 ## 語料檔範例
