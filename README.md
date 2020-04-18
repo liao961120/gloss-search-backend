@@ -2,7 +2,7 @@
 
 ## 專案目的
 
-這個專案主要是方便於處理語言田野調查課程所採集的檔案。這學期我們請了霧台魯凱語的族語老師，並將每個禮拜採集的語料整理成一個 `.docx` 檔。
+這個專案主要是方便於處理[語言田野調查課程](https://nol2.aca.ntu.edu.tw/nol/coursesearch/print_table.php?course_id=142%20M0210&class=&dpt_code=1420&ser_no=10017&semester=108-2&lang=CH)所採集的檔案。這學期我們請了霧台魯凱語的族語老師，並將每個禮拜採集的語料整理成一個 `.docx` 檔。
 
 此專案承接 [`puerdon/corpus_processor`](https://github.com/puerdon/corpus_processor)，將原本的實作從 Jupyter Notebook 擴充成 Web App。
 

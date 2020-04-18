@@ -8,7 +8,7 @@ RUN apk add --no-cache --virtual .build-deps gcc libc-dev libxslt-dev && \
     apk del .build-deps
 
 COPY requirements.txt /usr/src/app
-RUN pip install -r requirements.txt
+RUN pip install -r requirements-docker.txt
 COPY . /usr/src/app
 EXPOSE 80
 # Command to run when running docker run
