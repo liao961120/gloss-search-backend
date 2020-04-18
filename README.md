@@ -13,22 +13,34 @@
 
 ### Python 3
 
-#### `run_app.py` (簡單版)
+若電腦沒有 [Python 3](https://www.python.org/downloads/) (3.7 以上)，請先下載並安裝 (可見此[安裝教學](https://lopentu.github.io/PythonForHumanities/slides/week2.html#/))。接著請[下載](https://github.com/liao961120/corpus_processor/archive/master.zip)並解壓 `corpus_processor-master.zip`。
+
+#### 使用：快速簡單版
 
 直接執行 `run_app.py` 是最簡單的使用方式。在 (第一次) 執行前，請先修改 `run_app.py` 內的**檔案路徑** (至 `server.py` 以及 Word 文件所在之資料夾)。詳見 `run_app.py` 檔案內的說明。
 
-```bash
-python run_app.py    # on Windows
-python3 run_app.py   # on Mac
-```
 
-#### 完整版本
+1. 開啟 Terminal 執行 `run_app.py`
 
-1. (第一次使用時) 安裝 [Python 3](https://www.python.org/downloads/) (3.7 以上)
+    ```bash
+    python run_app.py    # on Windows
+    python3 run_app.py   # on Mac
+    ```
 
-1. (第一次使用時) [下載](https://github.com/liao961120/corpus_processor/archive/master.zip)並解壓 `corpus_processor-master.zip`
+1. 前往 <https://glosss.yongfu.name> 查詢語料
 
-1. (第一次使用時) 開啟 Terminal (e.g. `命令提示字元`)，更換工作目錄至 `corpus_processor-master/`，並執行
+    - 勾選 `Gloss`: 搜尋 interlinear gloss (e.g. 族語, `主格`, `OBJ` 等)
+        - 支援 RegEx 搜尋
+    - 勾選 `Notes`: 搜尋 `#e`, `#c`, 與 `#n` 的內容
+    - 若要尋找**同時含有**多項內容時，使用 `,` 分隔搜尋內容。例如，想搜尋同時包含 `主格`, `ki` 以及 `Takanaw` 的語料，可輸入：
+        
+        ```
+        主格,ki,Takanaw
+        ```
+
+#### 使用：一步一步來
+
+1. (第一次使用時) 開啟 Terminal，更換工作目錄至 `corpus_processor-master/`，並執行
 
     ```bash
     # cd /path/to/corpus_processor-master/
@@ -85,7 +97,7 @@ python3 run_app.py   # on Mac
 1. (第一次使用時) 安裝 [Docker Desktop](https://www.docker.com/products/docker-desktop)  
     **請注意電腦硬體及作業系統需求**
 
-1. (第一次使用時) 開啟 Terminal (e.g. `Powershell`, `命令提示字元`) 下載 docker image
+1. (第一次使用時) 開啟 Terminal 下載 docker image
 
     ```bash
     docker pull liao961120/gloss-search
