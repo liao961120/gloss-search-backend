@@ -1,5 +1,6 @@
 import os
 import re
+import logging
 from docx import Document
 
 
@@ -56,7 +57,7 @@ class GlossProcessor:
                 try:
                     glosses = process_doc(os.path.join(path, filename))
                 except:
-                    print(f"Invalid formatting in docx: `{filename}`")
+                    logging.warning(f"Invalid formatting in docx: `{filename}`")
                     continue
                 self.data[filename] = tokenize_glosses(glosses, filename)
 
@@ -209,7 +210,7 @@ def tokenize_glosses(glosses, filname):
         num_of_lines = len(gloss_lines) 
 
         if num_of_lines % 3 != 0:
-            print(f"Invalid gloss formatting: #{glosses[gloss_id][0]} in {filname}")
+            logging.warning(f"Invalid gloss formatting: #{glosses[gloss_id][0]} in {filname}")
             continue
 
         # Concat multiple lines to three

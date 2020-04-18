@@ -7,7 +7,7 @@ RUN apk add --no-cache --virtual .build-deps gcc libc-dev libxslt-dev && \
     pip install --no-cache-dir lxml>=3.5.0 && \
     apk del .build-deps
 
-COPY requirements.txt /usr/src/app
+COPY requirements-docker.txt /usr/src/app
 RUN pip install -r requirements-docker.txt
 COPY . /usr/src/app
 EXPOSE 80

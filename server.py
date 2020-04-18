@@ -6,7 +6,6 @@ from falcon_cors import CORS
 from GlossProcessor import GlossProcessor
 from GlossProcessor import get_files_timestamp
 
-
 logging.basicConfig(format='\n[GLOSS-SEARCH]:  %(message)s\n', datefmt='%Y/%m/%d %I:%M:%S', level=logging.INFO)
 
 # Initialize corpus
@@ -78,8 +77,6 @@ app.add_route('/query', searchGloss)
 
 if __name__ == '__main__':
     from wsgiref import simple_server
-
-    logging.basicConfig(format='\n[GLOSS-SEARCH]:  %(message)s\n', datefmt='%Y/%m/%d %I:%M:%S', level=logging.INFO)
 
     port = 1420
     print(f"Start serving at http://localhost:{port}")
