@@ -13,6 +13,17 @@
 
 ### Python 3
 
+#### `run_app.py` (簡單版)
+
+直接執行 `run_app.py` 是最簡單的使用方式。在 (第一次) 執行前，請先修改 `run_app.py` 內的**檔案路徑** (至 `server.py` 以及 Word 文件所在之資料夾)。詳見 `run_app.py` 檔案內的說明。
+
+```bash
+python run_app.py    # on Windows
+python3 run_app.py   # on Mac
+```
+
+#### 完整版本
+
 1. (第一次使用時) 安裝 [Python 3](https://www.python.org/downloads/) (3.7 以上)
 
 1. (第一次使用時) [下載](https://github.com/liao961120/corpus_processor/archive/master.zip)並解壓 `corpus_processor-master.zip`
@@ -51,7 +62,8 @@
 1. 執行程式
 
     ```bash
-    python server.py  # or python3 server.py
+    python server.py    # on Windows
+    python3 server.py   # on Mac
     ```
 
 1. 前往 <https://glosss.yongfu.name> 查詢語料
