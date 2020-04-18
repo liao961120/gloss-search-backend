@@ -52,8 +52,7 @@ class GlossProcessor:
     def _load_data(self, path):
 
         for filename in os.listdir(path):
-            if filename.endswith(".docx") or filename.endswith(".doc"):
-
+            if filename.endswith(".docx"):
                 try:
                     glosses = process_doc(os.path.join(path, filename))
                 except:

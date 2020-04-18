@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import falcon
 import logging
@@ -9,7 +10,10 @@ from GlossProcessor import get_files_timestamp
 logging.basicConfig(format='\n[GLOSS-SEARCH]:  %(message)s\n', datefmt='%Y/%m/%d %I:%M:%S', level=logging.INFO)
 
 # Initialize corpus
-DOCX_PATH = './corp'
+if len(sys.argv) > 1:
+    DOCX_PATH = sys.argv[1].strip()
+else:
+    DOCX_PATH = './corp'
 FILE_TIMESTAMPS = get_files_timestamp(DOCX_PATH)
 C = GlossProcessor(docs_folder_path=DOCX_PATH)
 
