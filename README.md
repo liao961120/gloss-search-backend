@@ -9,7 +9,7 @@
 
 ## 使用
 
-下方有兩種使用方式：[Python 3](#python-3) 或是 [Docker](#docker)。Python 3 在每次使用時會比較麻煩；Docker 在使用上方便許多，但某些電腦可能會因軟硬體不支援而無法安裝。
+下方有兩種使用方式：[Python 3](#python-3) 或是 [Docker](#docker)。Docker 在某些電腦可能會因軟硬體不支援而無法安裝。
 
 ### Python 3
 
