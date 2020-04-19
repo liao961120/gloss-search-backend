@@ -11,7 +11,7 @@ Then, download [`gloss-search-master.zip`](https://github.com/liao961120/gloss-s
 
 ### `run_app.py`
 
-There is a python script `run_app.py` inside the extracted zip file (`gloss-search-master.zip`). To use this program to search the corpus, you need to execute this script from the terminal with python. But BEFORE the first time you run this script, please edit two lines in `run_app.py` in which the absolute paths to the necessary folders and files are set:
+There is a python script `run_app.py` inside the extracted zip file (`gloss-search-master.zip`). To use this program to search the corpus, you need to execute this script in the terminal. But BEFORE the first time you run this script, please edit two lines in `run_app.py` in which the absolute paths to the necessary folders and files are set:
 
 ```python
 SERVER_SCRIPT_PATH = '/Users/<username>/Desktop/gloss-search-master/server.py'  # path to server.py in 
