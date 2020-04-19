@@ -20,9 +20,6 @@ DOCX_FOLDER_PATH = '/Users/<username>/Desktop/Linguistic_Fieldwork/'            
 
 So suppose you're using Mac and `gloss-search-master.zip` is extracted to `gloss-search-master/` on your desktop. Also, you have your interlinear glosses (`.docx` files) saved in another folder, `Linguistic_Fieldwork/`, on your desktop. Then the paths you in `run_app.py` should look very similar to the above example, except that you have to change `<username>` to that of yours.
 
-
-完成此設置後，只要**不更動語料檔資料夾及主程式資料夾位置**，之後僅要依照下方的兩個步驟即可啟動程式：
-
 After this setup, you can start the program with the steps below (as long as you keep the locations of the folders constant, you won't have to repeat the steps mentioned above the next time you start the program):
 
 1. Open your terminal and execute `run_app.py` with the command below:
