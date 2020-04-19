@@ -15,7 +15,7 @@ There is a python script `run_app.py` inside the extracted zip file (`gloss-sear
 
 ```python
 SERVER_SCRIPT_PATH = '/Users/<username>/Desktop/gloss-search-master/server.py'  # path to server.py in 
-DOCX_FOLDER_PATH = '/Users/<username>/Desktop/Linguistic_Fieldwork/'            # path to folder of docx files
+DOCX_FOLDER_PATH = '/Users/<username>/Desktop/Linguistic_Fieldwork/'            # path to the folder of docx files
 ```
 
 So suppose you're using Mac and `gloss-search-master.zip` is extracted to `gloss-search-master/` on your desktop. Also, you have your interlinear glosses (`.docx` files) saved in another folder, `Linguistic_Fieldwork/`, on your desktop. Then the paths you in `run_app.py` should look very similar to the above example, except that you have to change `<username>` to that of yours.
