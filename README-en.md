@@ -6,12 +6,12 @@
 
 ### Dependencies: Python 3
 
-To run this app, [Python 3](https://www.python.org/downloads/) (above 3.7) is required. Please install it if you don't have it on your computer.
+To run this program, [Python 3](https://www.python.org/downloads/) (above 3.7) is required. Please install it if you don't have it on your computer.
 Then, download [`gloss-search-master.zip`](https://github.com/liao961120/gloss-search/archive/master.zip) and extract it to a folder (you would need the path to this folder later).
 
 ### `run_app.py`
 
-There is a python script `run_app.py` inside the extracted zip file (`gloss-search-master.zip`). To use this program to search the corpus, you need to execute this script in the terminal. But BEFORE the first time you run this script, please edit two lines in `run_app.py` in which the absolute paths to the necessary folders and files are set:
+There is a python script `run_app.py` inside the extracted zip file (`gloss-search-master.zip`). To use this program to search the corpus, you need to execute this script in the terminal. But BEFORE the first time you run this script, please edit two lines in `run_app.py` that set the absolute paths to the necessary folders and files to run the program:
 
 ```python
 SERVER_SCRIPT_PATH = '/Users/<username>/Desktop/gloss-search-master/server.py'  # path to server.py in 
