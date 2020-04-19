@@ -38,11 +38,7 @@ DOCX_FOLDER_PATH = 'C:/Users/<使用者名稱>/Desktop/Linguistic_Fieldwork/'   
     - 勾選 `Gloss`: 搜尋 interlinear gloss (e.g. 族語, `主格`, `OBJ` 等)
         - 支援 RegEx 搜尋
     - 勾選 `Notes`: 搜尋 `#e`, `#c`, 與 `#n` 的內容
-    - 若要尋找**同時含有**多項內容時，使用 `,` 分隔搜尋內容。例如，想搜尋同時包含 `主格`, `ki` 以及 `Takanaw` 的語料，可輸入：
-        
-        ```
-        主格,ki,Takanaw
-        ```
+    - 若要尋找**同時含有**多項內容時，使用 `,` 分隔搜尋內容。例如，想搜尋同時包含 `主格`, `ki` 以及 `Takanaw` 的語料，可輸入 `主格,ki,Takanaw`
     
     ![Demo](https://img.yongfu.name/gif/gloss-search-min.gif)
 
@@ -134,14 +130,7 @@ CF-VBL-song=1SG.GEN      NOM    mother
     - 勾選 `Gloss`: 搜尋 interlinear gloss (e.g. 族語, `主格`, `OBJ` 等)
         - 支援 RegEx 搜尋
     - 勾選 `Notes`: 搜尋 `#e`, `#c`, 與 `#n` 的內容
-    - 若要尋找**同時含有**多項內容時，使用 `,` 分隔搜尋內容。例如，想搜尋同時包含 `主格`, `ki` 以及 `Takanaw` 的語料，可輸入：
-        
-        ```
-        主格,ki,Takanaw
-        ```
-
-    ![Demo](https://img.yongfu.name/gif/gloss-search-min.gif)
-
+    - 若要尋找**同時含有**多項內容時，使用 `,` 分隔搜尋內容。例如，想搜尋同時包含 `主格`, `ki` 以及 `Takanaw` 的語料，可輸入 `主格,ki,Takanaw`
 
 
 
@@ -179,10 +168,4 @@ CF-VBL-song=1SG.GEN      NOM    mother
     - 勾選 `Gloss`: 搜尋 interlinear gloss (e.g. 族語, `主格`, `OBJ` 等)
         - 支援 RegEx 搜尋
     - 勾選 `Notes`: 搜尋 `#e`, `#c`, 與 `#n` 的內容
-    - 若要尋找**同時含有**多項內容時，使用 `,` 分隔搜尋內容。例如，想搜尋同時包含 `主格`, `ki` 以及 `Takanaw` 的語料，可輸入：
-        
-        ```
-        主格,ki,Takanaw
-        ```
-    
-    ![Demo](https://img.yongfu.name/gif/gloss-search-min.gif)
+    - 若要尋找**同時含有**多項內容時，使用 `,` 分隔搜尋內容。例如，想搜尋同時包含 `主格`, `ki` 以及 `Takanaw` 的語料，可輸入 `主格,ki,Takanaw`
