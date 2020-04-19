@@ -13,7 +13,7 @@
 
 ### Dependencies: Python 3
 
-若電腦沒有 [Python 3](https://www.python.org/downloads/) (3.7 以上)，請先下載並安裝 (可見此[安裝教學](https://lopentu.github.io/PythonForHumanities/slides/week2.html#/))。接著請[下載](https://github.com/liao961120/gloss-search/archive/master.zip)並解壓 `gloss-search-master.zip`。
+若電腦沒有 [Python 3](https://www.python.org/downloads/) (3.7 以上)，請先安裝 (可見此[安裝教學](https://lopentu.github.io/PythonForHumanities/slides/week2.html#/))。接著請[下載](https://github.com/liao961120/gloss-search/archive/master.zip)並解壓 `gloss-search-master.zip`。
 
 ### `run_app.py`
 
@@ -24,9 +24,9 @@ SERVER_SCRIPT_PATH = 'C:/Users/<使用者名稱>/Desktop/gloss-search-master/ser
 DOCX_FOLDER_PATH = 'C:/Users/<使用者名稱>/Desktop/Linguistic_Fieldwork/'            # 語料檔資料夾
 ```
 
-完成此設置後，只要**不更動語料檔資料夾及主程式資料夾位置**，之後僅要依照下方的兩個步驟即可啟動程式：
+完成此設置後，只要**不更動語料檔資料夾及主程式資料夾位置**，下次在執行此程式時，僅需下方的兩個步驟即可：
 
-1. 開啟 Terminal 執行 `run_app.py`
+1. 開啟 Terminal 執行 `run_app.py` (注意作業系統)
 
     ```bash
     python run_app.py    # if you're on Windows

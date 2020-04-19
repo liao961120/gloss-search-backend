@@ -6,12 +6,12 @@
 
 ### Dependencies: Python 3
 
-To run this program, [Python 3](https://www.python.org/downloads/) (above 3.7) is required. Please install it if you don't have it on your computer.
+To run this program, [Python 3](https://www.python.org/downloads/) (above 3.7) is required. Yon need to install it if you don't have it on your computer.
 Then, download [`gloss-search-master.zip`](https://github.com/liao961120/gloss-search/archive/master.zip) and extract it to a folder (you would need the path to this folder later).
 
 ### `run_app.py`
 
-There is a python script `run_app.py` inside the extracted zip file (`gloss-search-master.zip`). To use this program to search the corpus, you need to execute this script in the terminal. But BEFORE the first time you run this script, please edit two lines in `run_app.py` that set the absolute paths to the necessary folder and file to run the program:
+There is a python script `run_app.py` inside the extracted zip file (`gloss-search-master.zip`). To use this program, you need to execute this script in the terminal. But BEFORE THE FIRST TIME you run this script, you have to edit two lines in `run_app.py` that set the absolute paths to the folder of the docx files and `server.py`, the script essential to this program:
 
 ```python
 SERVER_SCRIPT_PATH = '/Users/<username>/Desktop/gloss-search-master/server.py'  # path to gloss-search-master/server.py 
@@ -22,7 +22,7 @@ Suppose you use Mac and `gloss-search-master.zip` is extracted to `gloss-search-
 
 After this setup, you can start the program with the steps below (as long as you keep the locations of the folders constant, you won't have to repeat the steps mentioned above the next time you start the program):
 
-1. Open the terminal and execute `run_app.py` with the command below:
+1. Open the terminal and execute `run_app.py` with one of the command below (depends on your os):
 
     ```bash
     python run_app.py    # if you're on Windows
