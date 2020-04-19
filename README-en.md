@@ -22,7 +22,7 @@ Suppose you use Mac and `gloss-search-master.zip` is extracted to `gloss-search-
 
 After this setup, you can start the program with the steps below (as long as you keep the locations of the folders constant, you won't have to repeat the steps mentioned above the next time you start the program):
 
-1. Open your terminal and execute `run_app.py` with the command below:
+1. Open the terminal and execute `run_app.py` with the command below:
 
     ```bash
     python run_app.py    # if you're on Windows
