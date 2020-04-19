@@ -35,6 +35,7 @@ After this setup, you can start the program with the steps below (as long as you
         - search with [regular expression](https://en.wikipedia.org/wiki/Regular_expression) with `RegEx` selected
     - select `Notes` to target the free lines (those starting with `#e`, `#c`, and `#n`)
     - Concatenate multiple patterns with `,` to get glosses that match **all of the patterns**. For instance, to get glosses that contains both `NOM` and `ki`, search with the string:
+    
         ```
         NOM,ki
         ```
