@@ -1,4 +1,6 @@
-# gloss-search-backend
+# gloss-search
+
+**中文** | [English](./README-en.md)
 
 ## 專案目的
 
@@ -9,22 +11,26 @@
 
 ## 使用
 
-下方有兩種使用方式：[Python 3](#python-3) 或是 [Docker](#docker)。Docker 在某些電腦可能會因軟硬體不支援而無法安裝。
+### Dependencies: Python 3
 
-### Python 3
+若電腦沒有 [Python 3](https://www.python.org/downloads/) (3.7 以上)，請先下載並安裝 (可見此[安裝教學](https://lopentu.github.io/PythonForHumanities/slides/week2.html#/))。接著請[下載](https://github.com/liao961120/gloss-search/archive/master.zip)並解壓 `gloss-search-master.zip`。
 
-若電腦沒有 [Python 3](https://www.python.org/downloads/) (3.7 以上)，請先下載並安裝 (可見此[安裝教學](https://lopentu.github.io/PythonForHumanities/slides/week2.html#/))。接著請[下載](https://github.com/liao961120/corpus_processor/archive/master.zip)並解壓 `corpus_processor-master.zip`。
+### `run_app.py`
 
-#### 使用：快速簡單版
+直接執行 `gloss-search-master/` 裡的 `run_app.py` 是最簡單的使用方式。在 (第一次) 執行前，請先修改 `run_app.py` 內的**檔案路徑** (至 `server.py` 以及 Word 文件所在之資料夾)。(以 Windows 為例，) 若你將 `gloss-search-master/` 置於**桌面**，且桌面有另一**存放語料檔 (`.docx`) 的資料夾** (`Linguistic_Fieldwork/`)，則要至 `run_app.py` 將其中的這兩行改成這樣 （請修改下方的`<使用者名稱>`）：
 
-直接執行 `run_app.py` 是最簡單的使用方式。在 (第一次) 執行前，請先修改 `run_app.py` 內的**檔案路徑** (至 `server.py` 以及 Word 文件所在之資料夾)。詳見 `run_app.py` 檔案內的說明。
+```python
+SERVER_SCRIPT_PATH = 'C:/Users/<使用者名稱>/Desktop/gloss-search-master/server.py'  # 主程式路徑
+DOCX_FOLDER_PATH = 'C:/Users/<使用者名稱>/Desktop/Linguistic_Fieldwork/'            # 語料檔資料夾
+```
 
+完成此設置後，只要**不更動語料檔資料夾及主程式資料夾位置**，之後僅要依照下方的兩個步驟即可啟動程式：
 
 1. 開啟 Terminal 執行 `run_app.py`
 
     ```bash
-    python run_app.py    # on Windows
-    python3 run_app.py   # on Mac
+    python run_app.py    # if you're on Windows
+    python3 run_app.py   # if you're on Mac
     ```
 
 1. 前往 <https://glosss.yongfu.name> 查詢語料
@@ -37,10 +43,55 @@
         ```
         主格,ki,Takanaw
         ```
+    
+    ![Demo](https://img.yongfu.name/gif/gloss-search-min.gif)
 
-#### 使用：一步一步來
+---
 
-1. (第一次使用時) 開啟 Terminal，更換工作目錄至 `corpus_processor-master/`，並執行
+## 語料檔
+
+#### 範例
+
+```
+1.
+ma-tas=sami         su     tigami     ni     Payan    babay   i    Laway
+AF-write=1PL.NOM    ACC    letter     BEN    Payan    for     NOM  Laway
+主焦-寫=1PL.主格     受格    信         受益格   Payan    給      主格  Laway
+
+#e I write the letter to Laway with Payan.  
+#c 我跟Payan一起寫信給Laway。   
+#n 比較 ki Payan 和 ni Payan: ki Payan的意思為「和 Payan」，ni Payan的意思為「 Payan的信」。
+
+2.
+si-pa-quwas=mu           i      yaya
+CF-VBL-song=1SG.GEN      NOM    mother
+參焦-動化-歌=1SG.屬格      名詞    媽媽
+ 
+#e I sing for mom.
+#c 我唱歌給媽媽聽。
+#n i 可以省略。
+```
+
+#### 格式
+```
+[編號].
+[族語轉寫]
+[英文Glossing]
+[中文Glossing]
+[空行]
+#e [英文翻譯]
+#c [中文翻譯]
+#n [註釋]
+[空行]
+```
+
+---
+
+## Developer's Notes
+
+### Python Usage
+
+1. (第一次使用時) 開啟 Terminal，更換工作目錄至 `gloss-search-master/`，並執行
 
     ```bash
     # cd /path/to/corpus_processor-master/
@@ -50,7 +101,7 @@
 1. 將語料放置於此資料夾內的 `corp/`
     
     ```
-    corpus_processor-master/    # uncompressed root folder
+    gloss-search-master/        # uncompressed root folder
     │
     ├── corp/                   # put glossing docx here
     │   ├── 20200318.docx
@@ -65,10 +116,10 @@
     └── server.py
     ```
 
-1. 開啟 Terminal，更換工作目錄至 `corpus_processor-master/`
+1. 開啟 Terminal，更換工作目錄至 `gloss-search-master/`
 
     ```bash
-    cd /path/to/corpus_processor-master/
+    cd /path/to/gloss-search-master/
     ```
 
 1. 執行程式
@@ -92,10 +143,10 @@
     ![Demo](https://img.yongfu.name/gif/gloss-search-min.gif)
 
 
-### Docker
 
-1. (第一次使用時) 安裝 [Docker Desktop](https://www.docker.com/products/docker-desktop)  
-    **請注意電腦硬體及作業系統需求**
+
+### Docker Usage
+
 
 1. (第一次使用時) 開啟 Terminal 下載 docker image
 
@@ -135,39 +186,3 @@
         ```
     
     ![Demo](https://img.yongfu.name/gif/gloss-search-min.gif)
-
-
-## 語料檔範例
-
-```
-1.
-ma-tas=sami         su     tigami     ni     Payan    babay   i    Laway
-AF-write=1PL.NOM    ACC    letter     BEN    Payan    for     NOM  Laway
-主焦-寫=1PL.主格     受格    信         受益格   Payan    給      主格  Laway
-
-#e I write the letter to Laway with Payan.  
-#c 我跟Payan一起寫信給Laway。   
-#n 比較 ki Payan 和 ni Payan: ki Payan的意思為「和 Payan」，ni Payan的意思為「 Payan的信」。
-
-2.
-si-pa-quwas=mu           i      yaya
-CF-VBL-song=1SG.GEN      NOM    mother
-參焦-動化-歌=1SG.屬格      名詞    媽媽
- 
-#e I sing for mom.
-#c 我唱歌給媽媽聽。
-#n i 可以省略。
-```
-
-## 語料檔格式
-```
-[編號].
-[族語轉寫]
-[英文Glossing]
-[中文Glossing]
-[空行]
-#e [英文翻譯]
-#c [中文翻譯]
-#n [註釋]
-[空行]
-```
