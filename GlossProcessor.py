@@ -90,7 +90,7 @@ class GlossProcessor:
                 matched_num = 0
                 for tk in tokens:
                     if regex:
-                        if sum( 1 for g_tk in gloss_tokens if re.match(tk, g_tk) ) > 0:
+                        if sum( 1 for g_tk in gloss_tokens if re.search(tk, g_tk) ) > 0:
                             matched_num += 1
                     else:
                         if tk in gloss_tokens:
