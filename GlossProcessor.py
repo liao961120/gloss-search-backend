@@ -61,16 +61,7 @@ class GlossProcessor:
                 self.data[filename] = tokenize_glosses(glosses, filename)
 
 
-
-    def search(self, isgloss: bool, tokens: str, regex=False):
-        if isgloss:
-            return self.search_gloss(tokens, regex)
-        else:
-            return self.search_free(tokens)
-
-
-
-    def search_gloss(self, tokens: str, regex=False):
+    def search_gloss(self, tokens: str, regex=False, hyphens=False):
         
         # Parse into a list of tokens
         if ',' in tokens:
@@ -83,7 +74,14 @@ class GlossProcessor:
         for doc_id, doc in self.data.items():
             for gloss_id, gloss in enumerate(doc):
                 
-                gloss_content = gloss[1]['gloss']
+                gloss_content = gloss[1]['gloss'].copy()
+
+                # Remove hyphens in first line in gloss
+                if not hyphens:
+                    for i, tup in enumerate(gloss_content):
+                        gloss_content[i] = (tup[0].replace('-', ''), tup[1], tup[2])
+
+
                 gloss_tokens = { tk for tup in gloss_content for tk in tup }
 
                 # Check all tokens presented in gloss
@@ -99,7 +97,7 @@ class GlossProcessor:
                     matched_glosses.append({
                         'file': doc_id,
                         'num': gloss[0],
-                        'gloss': gloss[1]['gloss'],
+                        'gloss': gloss_content, #gloss[1]['gloss'],
                         'free': gloss[1]['free'],
                     })
         

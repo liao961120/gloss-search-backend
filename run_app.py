@@ -13,11 +13,13 @@ Usage:
 # please set the paths to server.py and 
 # the corpus data (the folder where you put docx files in)
 # On windows, should be something like:
-SERVER_SCRIPT_PATH = 'C:/Users/liao/Desktop/gloss-search-backend/server.py'
-DOCX_FOLDER_PATH = 'C:/Users/liao/Desktop/Linguistic_Fieldwork/'
+#SERVER_SCRIPT_PATH = 'C:/Users/liao/Desktop/gloss-search-backend/server.py'
+#DOCX_FOLDER_PATH = 'C:/Users/liao/Desktop/Linguistic_Fieldwork/'
 # On Mac, should be something like:
 #SERVER_SCRIPT_PATH = '/Users/liao/corpus_processor/server.py'
 #DOCX_FOLDER_PATH = '/Users/liao/Desktop/Linguistic_Fieldwork'
+SERVER_SCRIPT_PATH = '/home/liao/corpus_processor/server.py'
+DOCX_FOLDER_PATH = '/home/liao/Desktop/108-2/Linguistic_Fieldwork/'
 
 
 
