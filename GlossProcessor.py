@@ -141,31 +141,30 @@ class GlossProcessor:
 
 #--------------- Helper functions -------------------#
 def process_doc(fp="corp/20200325.docx"):
-    
-    # Load document
+
+    # Normalize document into a list of lines
     d = Document(fp)
-    a_doc = '\n'.join(p.text for p in d.paragraphs)  # normalize paragraphs to newlines
-    
-    # Find the places of glosses
+    a_doc = '\n'.join(p.text for p in d.paragraphs)
+    a_doc = a_doc.split('\n')
+
+    # Find the positions of each elicitation
     pat_start = re.compile("^(\d{1,2})\.")
-    a_doc_split = a_doc.split('\n')
     glosses_on = []
     gloss_num_old = None
-    for i, line in enumerate(a_doc_split):
-
+    for i, line in enumerate(a_doc):
         if pat_start.match(line):
             gloss_num_new = i
 
-            # Save gloss range
+            # Save each elicitation range
             if gloss_num_old is not None:
                 glosses_on.append( (gloss_num_old, gloss_num_new - 1) )
             gloss_num_old = gloss_num_new
 
-    # Get all glosses
+    # Get all elicitations in the document
     glosses = []
-    for s, e in glosses_on:
-        gloss_num = int(re.match("(\d+)\.", a_doc_split[s])[1])
-        gloss_lines = [ l.strip() for l in a_doc_split[(s+1):e] ]
+    for start, end in glosses_on:
+        gloss_num = int(re.match("(\d+)\.", a_doc[start])[1])
+        gloss_lines = [ l.strip() for l in a_doc[(start + 1):end] ]
         glosses.append( (gloss_num, gloss_lines) )
     
     return glosses
