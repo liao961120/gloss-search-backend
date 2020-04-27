@@ -20,8 +20,8 @@
 直接執行 `gloss-search-master/` 裡的 `run_app.py` 是最簡單的使用方式。在 (第一次) 執行前，請先修改 `run_app.py` 內的**檔案路徑** (至 `server.py` 以及 Word 文件所在之資料夾)。(以 Windows 為例，) 若你將 `gloss-search-master/` 置於**桌面**，且桌面有另一**存放語料檔 (`.docx`) 的資料夾** (`Linguistic_Fieldwork/`)，則要至 `run_app.py` 將其中的這兩行改成這樣 （請修改下方的`<使用者名稱>`）：
 
 ```python
-SERVER_SCRIPT_PATH = 'C:/Users/<使用者名稱>/Desktop/gloss-search-master/server.py'  # 主程式路徑
-DOCX_FOLDER_PATH = 'C:/Users/<使用者名稱>/Desktop/Linguistic_Fieldwork/'            # 語料檔資料夾
+SERVER_SCRIPT_PATH = r'C:\Users\<使用者名稱>\Desktop\gloss-search-master\server.py'  # 主程式路徑
+DOCX_FOLDER_PATH = r'C:\Users\<使用者名稱>\Desktop\Linguistic_Fieldwork'             # 語料檔資料夾
 ```
 
 完成此設置後，只要**不更動語料檔資料夾及主程式資料夾位置**，下次在執行此程式時，僅需下方的兩個步驟即可：

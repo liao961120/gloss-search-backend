@@ -14,8 +14,8 @@ Then, download [`gloss-search-master.zip`](https://github.com/liao961120/gloss-s
 There is a python script `run_app.py` inside the extracted zip file (`gloss-search-master.zip`). To use this program, you need to execute this script in the terminal. But BEFORE THE FIRST TIME you run this script, you have to edit two lines in `run_app.py` that set the absolute paths to the folder of the docx files and `server.py`, the script essential to this program:
 
 ```python
-SERVER_SCRIPT_PATH = '/Users/<username>/Desktop/gloss-search-master/server.py'  # path to gloss-search-master/server.py 
-DOCX_FOLDER_PATH = '/Users/<username>/Desktop/Linguistic_Fieldwork/'            # path to the folder of docx files
+SERVER_SCRIPT_PATH = r'/Users/<username>/Desktop/gloss-search-master/server.py'  # path to gloss-search-master/server.py 
+DOCX_FOLDER_PATH = r'/Users/<username>/Desktop/Linguistic_Fieldwork/'            # path to the folder of docx files
 ```
 
 Suppose you use Mac and `gloss-search-master.zip` is extracted to `gloss-search-master/` on your desktop. Also, you have your interlinear glosses (`.docx` files) saved in another folder, `Linguistic_Fieldwork/`, on your desktop. Then the paths you set in `run_app.py` should look very similar to the above example, except that you have to change `<username>` to that of yours.
