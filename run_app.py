@@ -34,7 +34,8 @@ import pkg_resources
 # Setup os specific parameters
 python = sys.executable
 SERVER_SCRIPT_PATH = pathlib.Path(SERVER_SCRIPT_PATH)
-DOCX_FOLDER_PATH = pathlib.Path(DOCX_FOLDER_PATH)
+os.chdir(DOCX_FOLDER_PATH)
+DOCX_FOLDER_PATH = pathlib.Path('.')
 
 
 # Check & install dependencies

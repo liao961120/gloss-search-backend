@@ -1,5 +1,6 @@
 import os
 import re
+import pathlib
 import logging
 from docx import Document
 
@@ -51,15 +52,15 @@ class GlossProcessor:
 
 
     def _load_data(self, path):
-
-        for filename in os.listdir(path):
-            if filename.endswith(".docx"):
-                try:
-                    glosses = process_doc(os.path.join(path, filename))
-                except:
-                    logging.warning(f"Invalid formatting in docx: `{filename}`")
-                    continue
-                self.data[filename] = tokenize_glosses(glosses, filename)
+        path = pathlib.Path(path)
+        
+        for fp in path.rglob('*.docx'):
+            try:
+                glosses = process_doc(str(fp))
+            except:
+                logging.warning(f"Invalid formatting in docx: `{fp}`")
+                continue
+            self.data[str(fp)] = tokenize_glosses(glosses, str(fp))
 
 
     def search_gloss(self, tokens: str, regex=False):
