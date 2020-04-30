@@ -38,13 +38,11 @@ class Query(object):
             'query': 'ku,ki',
             'regex': 0,
             'type': 'gloss',  # 'free'
-            'hyphens': 1,
         }
         # Parse query string
         for k, v in req.params.items():
             params[k] = v
         params['regex'] = int(params['regex'])
-        params['hyphens'] = int(params['hyphens'])
 
         ############ DEBUGGING ##############
         logging.debug("Recieved request!!!")
@@ -52,7 +50,7 @@ class Query(object):
         
         # Search corpus
         if params['type'] == 'gloss':
-            results = C.search_gloss(tokens=params['query'], regex=params['regex'], hyphens=params['hyphens'])
+            results = C.search_gloss(tokens=params['query'], regex=params['regex'])
         else:
             results = C.search_free(tokens=params['query'])
         

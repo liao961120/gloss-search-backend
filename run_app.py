@@ -18,6 +18,7 @@ Usage:
 # On Mac, should be something like:
 #SERVER_SCRIPT_PATH = r'/Users/liao/corpus_processor/server.py'
 #DOCX_FOLDER_PATH = r'/Users/liao/Desktop/Linguistic_Fieldwork'
+# On Linux, should be something like:
 SERVER_SCRIPT_PATH = r'/home/liao/corpus_processor/server.py'
 DOCX_FOLDER_PATH = r'/home/liao/Desktop/108-2/Linguistic_Fieldwork/'
 

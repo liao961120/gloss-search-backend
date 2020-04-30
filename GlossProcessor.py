@@ -21,6 +21,7 @@ class GlossProcessor:
         {
         '20200325.docx': [
             (1, {
+                'ori': ['yakay', 'ku', 'tatulru', 'ku', 'ababay/sauvalay', 'ku', 'agili'],
                 'gloss': [
                     ('yakay', 'have', '有'),
                     ('ku', 'three', '3'),
@@ -61,7 +62,7 @@ class GlossProcessor:
                 self.data[filename] = tokenize_glosses(glosses, filename)
 
 
-    def search_gloss(self, tokens: str, regex=False, hyphens=False):
+    def search_gloss(self, tokens: str, regex=False):
         
         # Parse into a list of tokens
         if ',' in tokens:
@@ -74,15 +75,11 @@ class GlossProcessor:
         for doc_id, doc in self.data.items():
             for gloss_id, gloss in enumerate(doc):
                 
-                gloss_content = gloss[1]['gloss'].copy()
-
-                # Remove hyphens in first line in gloss
-                if not hyphens:
-                    for i, tup in enumerate(gloss_content):
-                        gloss_content[i] = (tup[0].replace('-', ''), tup[1], tup[2])
-
-
-                gloss_tokens = { tk for tup in gloss_content for tk in tup }
+                # Get tokens from aligned lines
+                gloss_tokens = { tk for tup in gloss[1]['gloss'].copy() for tk in tup }
+                # Get tokens from original language line
+                for tk in gloss[1]['ori']:
+                    gloss_tokens.add(tk)
 
                 # Check all tokens presented in gloss
                 matched_num = 0
@@ -97,7 +94,8 @@ class GlossProcessor:
                     matched_glosses.append({
                         'file': doc_id,
                         'num': gloss[0],
-                        'gloss': gloss_content, #gloss[1]['gloss'],
+                        'ori': gloss[1]['ori'],
+                        'gloss': gloss[1]['gloss'],
                         'free': gloss[1]['free'],
                     })
         
@@ -205,9 +203,16 @@ def tokenize_glosses(glosses, filname):
         # 3*n + n
         num_of_lines = len(gloss_lines) 
 
-        if num_of_lines % 3 != 0:
+        if num_of_lines % 3 != 0 and (num_of_lines - 1) % 3 !=0:
             logging.warning(f"Invalid gloss formatting: #{glosses[gloss_id][0]} in {filname}")
             continue
+        
+        # Deal with two possible formats: gloss with/without original language
+        if (num_of_lines - 1) % 3 == 0:
+            ori_lang = gloss_lines.pop(0)
+            num_of_lines -= 1
+        else:
+            ori_lang = ''
 
         # Concat multiple lines to three
         rk_gloss = ''
@@ -218,10 +223,11 @@ def tokenize_glosses(glosses, filname):
             en_gloss += gloss_lines[1 + i * 3] + '\t'
             zh_gloss += gloss_lines[2 + i * 3] + '\t'
 
+        # Convert gloss lines to lists
+        ori_lang = ori_lang.strip().split()
         rk_gloss = rk_gloss.strip().split()
         en_gloss = en_gloss.strip().split()
         zh_gloss = zh_gloss.strip().split()
-        
         
         # Tokenize
         gloss = []
@@ -233,6 +239,7 @@ def tokenize_glosses(glosses, filname):
                 en = '_'
             else:
                 en = en_gloss[i]
+            
             if not i < zh_len:
                 zh = '_'
             else:
@@ -246,7 +253,7 @@ def tokenize_glosses(glosses, filname):
             
            (glosses[gloss_id][0], 
             {
-            #'ori': glosses[gloss_id][1],
+            'ori': ori_lang,
             'gloss': gloss,
             'free': [l for l in free_lines if l != '']
             }
