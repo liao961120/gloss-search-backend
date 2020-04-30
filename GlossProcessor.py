@@ -273,3 +273,29 @@ def get_files_timestamp(dir):
             data[fp] = os.stat(fp).st_mtime
     
     return data
+
+
+
+if __name__ == "__main__":
+    import json
+
+    DOCX_FOLDER_PATH = r'/home/liao/Desktop/gloss-data/'
+    os.chdir(DOCX_FOLDER_PATH)
+    DOCX_FOLDER_PATH = pathlib.Path('.')
+
+
+    C = GlossProcessor(docs_folder_path=DOCX_FOLDER_PATH)
+
+    # Flatten data to match frontend json format
+    output_glosses = []
+    for docname, glosses in C.data.items():
+        for gloss_num, gloss in glosses:
+            gloss.update({
+                'file': docname,
+                'num': gloss_num,
+            })
+            output_glosses.append(gloss)
+    
+    # Write to json
+    with open("data.json", "w", encoding="utf-8") as f:
+        json.dump(output_glosses, f, ensure_ascii=False)
