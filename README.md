@@ -50,6 +50,8 @@ DOCX_FOLDER_PATH = r'C:\Users\<使用者名稱>\Desktop\Linguistic_Fieldwork'   
 
 ```
 1.
+matassami su tigami ni Payan babay i Laway
+
 ma-tas=sami         su     tigami     ni     Payan    babay   i    Laway
 AF-write=1PL.NOM    ACC    letter     BEN    Payan    for     NOM  Laway
 主焦-寫=1PL.主格     受格    信         受益格   Payan    給      主格  Laway
@@ -71,7 +73,8 @@ CF-VBL-song=1SG.GEN      NOM    mother
 #### 格式
 ```
 [編號].
-[族語轉寫]
+[族語轉寫(原始, Optional)]
+[族語分析(aligned)]
 [英文Glossing]
 [中文Glossing]
 [空行]
