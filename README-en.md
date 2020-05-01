@@ -46,6 +46,8 @@ After this setup, you can start the program with the steps below (as long as you
 
 ```
 1.
+matassami su tigami ni Payan babay i Laway
+
 ma-tas=sami         su     tigami     ni     Payan    babay   i    Laway
 AF-write=1PL.NOM    ACC    letter     BEN    Payan    for     NOM  Laway
 主焦-寫=1PL.主格     受格    信         受益格   Payan    給      主格  Laway
@@ -67,13 +69,15 @@ CF-VBL-song=1SG.GEN      NOM    mother
 #### Format
 
 ```
-[編號].
-[族語轉寫]
-[英文Glossing]
-[中文Glossing]
-[空行]
-#e [英文翻譯]
-#c [中文翻譯]
-#n [註釋]
-[空行]
+[Number].
+[Original language]
+[Empty line (optional)]
+[Original language (aligned)]
+[English glossing (aligned)]
+[Chinese glossing (aligned)]
+[Empty line]
+#e [English translation]
+#c [Chinese translation]
+#n [Notes]
+[Empty line]
 ```

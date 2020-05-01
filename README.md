@@ -73,10 +73,11 @@ CF-VBL-song=1SG.GEN      NOM    mother
 #### 格式
 ```
 [編號].
-[族語轉寫(原始, Optional)]
-[族語分析(aligned)]
-[英文Glossing]
-[中文Glossing]
+[族語轉寫 (原始, optional)]
+[空行 (optional)]
+[族語分析 (aligned)]
+[英文Glossing (aligned)]
+[中文Glossing (aligned)]
 [空行]
 #e [英文翻譯]
 #c [中文翻譯]
