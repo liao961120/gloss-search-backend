@@ -147,7 +147,7 @@ def process_doc(fp="corp/20200325.docx"):
     a_doc = a_doc.split('\n')
 
     # Find the positions of each elicitation
-    pat_start = re.compile("^(\d{1,2})\.")
+    pat_start = re.compile("^(\d{1,2})\.\s*$")
     glosses_on = []
     gloss_num_old = None
     for i, line in enumerate(a_doc):
@@ -182,7 +182,7 @@ def process_doc(fp="corp/20200325.docx"):
 
 def assign_gloss_free_lines(gloss):
     
-    free_lines = ['#e', '#c', '#n']
+    free_lines = [ [], [], [] ]
     gloss_lines = []
     
     for lid, l in enumerate(gloss.copy()):
@@ -190,24 +190,24 @@ def assign_gloss_free_lines(gloss):
         # Assign free lines
         if l.startswith('#'):
             if l.startswith('#e'):
-                free_lines[0] = l
+                free_lines[0].append(l)
             elif l.startswith('#c'):
-                free_lines[1] = l
+                free_lines[1].append(l)
             elif l.startswith('#n'):
-                free_lines[2] = l
+                free_lines[2].append(l)
             else:
                 # Deal with typos
                 logging.info(f'Free line(s) missing `e`, `c`, or `n` after `#`!: {l}')
                 for i, fl in enumerate(free_lines):
-                    if fl in {'#e', '#c', '#n'}:
-                        free_lines[i] = l
+                    if fl == []:
+                        free_lines[i].append(l)
                         break
 
         # Assign gloss lines
-        if not (l.startswith('#') or l.strip() == ''):
-            gloss_lines.append(l.strip())
+        if not (l.startswith('#') or l == ''):
+            gloss_lines.append(l)
 
-    return gloss_lines, free_lines
+    return gloss_lines, ['\n'.join(l) for l in free_lines]
 
 
 
@@ -301,6 +301,14 @@ if __name__ == "__main__":
     DOCX_FOLDER_PATH = r'/home/liao/Desktop/gloss-data/'
     os.chdir(DOCX_FOLDER_PATH)
     DOCX_FOLDER_PATH = pathlib.Path('.')
+
+    # Format docx filename
+    pat_fn = re.compile(r'\d{4,}')
+    for fp in DOCX_FOLDER_PATH.rglob('*.docx'):
+        new_fn = pat_fn.search(str(fp))
+        if new_fn:
+            new_fp = str(fp).replace(fp.name, f"{new_fn[0]}.docx")
+            os.rename(str(fp), new_fp)
 
 
     C = GlossProcessor(docs_folder_path=DOCX_FOLDER_PATH)
