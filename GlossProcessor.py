@@ -158,6 +158,16 @@ def process_doc(fp="corp/20200325.docx"):
             if gloss_num_old is not None:
                 glosses_on.append( (gloss_num_old, gloss_num_new - 1) )
             gloss_num_old = gloss_num_new
+    
+    # Save last gloss
+    i = gloss_num_old
+    while True:
+        i += 1
+        if a_doc[i].strip().startswith('#'):
+            if len(a_doc) == i + 1 or (not a_doc[i + 1].strip().startswith('#')):
+                end_idx = i + 1
+                break
+    glosses_on.append( (gloss_num_old, i) )
 
     # Get all elicitations in the document
     glosses = []
@@ -178,15 +188,23 @@ def assign_gloss_free_lines(gloss):
     for lid, l in enumerate(gloss.copy()):
 
         # Assign free lines
-        if l.startswith('#e'):
-            free_lines[0] = l
-        elif l.startswith('#c'):
-            free_lines[1] = l
-        elif l.startswith('#n'):
-            free_lines[2] = l
+        if l.startswith('#'):
+            if l.startswith('#e'):
+                free_lines[0] = l
+            elif l.startswith('#c'):
+                free_lines[1] = l
+            elif l.startswith('#n'):
+                free_lines[2] = l
+            else:
+                # Deal with typos
+                logging.info(f'Free line(s) missing `e`, `c`, or `n` after `#`!: {l}')
+                for i, fl in enumerate(free_lines):
+                    if fl in {'#e', '#c', '#n'}:
+                        free_lines[i] = l
+                        break
 
         # Assign gloss lines
-        if not (l.startswith('#e') or l.startswith('#c') or l.startswith('#n') or l.strip() == ''):
+        if not (l.startswith('#') or l.strip() == ''):
             gloss_lines.append(l.strip())
 
     return gloss_lines, free_lines
@@ -278,6 +296,7 @@ def get_files_timestamp(dir):
 
 if __name__ == "__main__":
     import json
+    logging.basicConfig(level=logging.INFO)
 
     DOCX_FOLDER_PATH = r'/home/liao/Desktop/gloss-data/'
     os.chdir(DOCX_FOLDER_PATH)
