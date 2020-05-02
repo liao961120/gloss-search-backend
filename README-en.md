@@ -70,11 +70,11 @@ CF-VBL-song=1SG.GEN      NOM    mother
 
 ```
 [Number].
-[Original language]
+[Original language (optional)]
 [EMPTY LINE (optional)]
-[Original language (aligned)]
-[English glossing (aligned)]
-[Chinese glossing (aligned)]
+[Gloss line 1 (original language)]
+[Gloss line 2 (English)]
+[Gloss line 3 (Mandarin)]
 [EMPTY LINE]
 #e [English translation]
 #c [Chinese translation]
