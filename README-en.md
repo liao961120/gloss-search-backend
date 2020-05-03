@@ -33,10 +33,10 @@ After this setup, you can start the program with the steps below (as long as you
 
 1. Visit <https://glosss.yongfu.name> to search the docx files:
 
-    - select `Local` to search files on your computer (selecting `Web` searches from online database).
-    - select `Gloss` to target the gloss lines (lines with aligned tokens)
-        - search with [regular expression](https://en.wikipedia.org/wiki/Regular_expression) with `RegEx` selected
-    - select `Notes` to target the free lines (those starting with `#e`, `#c`, and `#n`)
+    - Select `Local` to search files on your computer (selecting `Web` searches from online database).
+    - Select `Gloss` to target the gloss lines (lines with aligned tokens)
+        - Search with [regular expression](https://en.wikipedia.org/wiki/Regular_expression) with `RegEx` selected
+    - Select `Notes` to target the free lines (those starting with `#e`, `#c`, and `#n`)
     - Concatenate multiple patterns with `,` to get glosses that **match all of them**. For instance, to get glosses that contains both `NOM` and `ki`, search with the string `NOM,ki`.
 
     ![Demo](https://img.yongfu.name/gif/gloss-search-min.gif)
