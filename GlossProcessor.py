@@ -62,7 +62,7 @@ class GlossProcessor:
             try:
                 glosses = process_doc(str(fp))
             except:
-                logging.warning(f"Invalid formatting in docx: `{fp}`")
+                logging.warning(f"`{fp}` #__:  invalid DOCX  formatting")
                 continue
             self.data[str(fp)] = tokenize_glosses(glosses, str(fp))
 
@@ -219,7 +219,7 @@ def tokenize_glosses(glosses, filname):
         num_of_lines = len(gloss_lines) 
 
         if num_of_lines % 3 != 0 and (num_of_lines - 1) % 3 !=0:
-            logging.warning(f"Invalid gloss formatting: #{glosses[gloss_id][0]} in {filname}")
+            logging.warning(f"`{filname}` #{glosses[gloss_id][0]:<2}:  invalid GLOSS formatting")
             continue
         
         # Deal with two possible formats: gloss with/without original language
@@ -299,7 +299,7 @@ if __name__ == "__main__":
     DOCX_FOLDER_PATH = r'2020_Budai_Rukai/'
     GDRIVE_URL = sys.argv[1]
 
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.INFO, format='%(message)s', filemode='w', filename=f'{DOCX_FOLDER_PATH.strip("/")}.log')
 
     # Download from GDrive
     cmd = f'curl gdrive.sh | bash -s {GDRIVE_URL} > curl_download.log'
