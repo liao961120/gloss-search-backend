@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/liao961120/gloss-search.svg?branch=master)](https://travis-ci.org/liao961120/gloss-search)
+
 # gloss-search
 
 **中文** | [English](./README-en.md)
@@ -35,6 +37,7 @@ DOCX_FOLDER_PATH = r'C:\Users\<使用者名稱>\Desktop\Linguistic_Fieldwork'   
 
 1. 前往 <https://glosss.yongfu.name> 查詢語料
 
+    - 勾選 `Local`: 搜尋自己電腦上的檔案 (選擇 `Web` 則會搜尋線上資料庫)
     - 勾選 `Gloss`: 搜尋 interlinear gloss (e.g. 族語, `主格`, `OBJ` 等)
         - 支援 RegEx 搜尋
     - 勾選 `Notes`: 搜尋 `#e`, `#c`, 與 `#n` 的內容

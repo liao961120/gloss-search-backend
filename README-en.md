@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/liao961120/gloss-search.svg?branch=master)](https://travis-ci.org/liao961120/gloss-search)
+
 # gloss-search
 
 **English** | [中文](./README.md)
@@ -31,6 +33,7 @@ After this setup, you can start the program with the steps below (as long as you
 
 1. Visit <https://glosss.yongfu.name> to search the docx files:
 
+    - select `Local` to search files on your computer (selecting `Web` searches from online database).
     - select `Gloss` to target the gloss lines (lines with aligned tokens)
         - search with [regular expression](https://en.wikipedia.org/wiki/Regular_expression) with `RegEx` selected
     - select `Notes` to target the free lines (those starting with `#e`, `#c`, and `#n`)
