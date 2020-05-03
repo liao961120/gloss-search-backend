@@ -137,6 +137,7 @@ class GlossProcessor:
                     matched_glosses.append({
                         'file': doc_id,
                         'num': gloss[0],
+                        'ori': gloss[1]['ori'],
                         'gloss': gloss[1]['gloss'],
                         'free': gloss[1]['free'],
                     })

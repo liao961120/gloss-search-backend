@@ -52,7 +52,7 @@ class Query(object):
         if params['type'] == 'gloss':
             results = C.search_gloss(tokens=params['query'], regex=params['regex'])
         else:
-            results = C.search_free(tokens=params['query'])
+            results = C.search_free(tokens=params['query'], regex=params['regex'])
         
         ############ DEBUGGING ##############
         logging.debug("Sending response...")
