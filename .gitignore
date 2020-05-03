@@ -1,8 +1,10 @@
 *.docx
 *.doc
+*.ipynb
+*.zip
 .ipynb_checkpoints*
 __pycache__
 test-corp
 !corp/20200408-test.docx
 test*
-*.ipynb
+2020_Budai_Rukai

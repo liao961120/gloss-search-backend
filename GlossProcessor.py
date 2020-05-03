@@ -1,8 +1,11 @@
 import os
 import re
+import json
 import pathlib
 import logging
 from docx import Document
+
+PERSON_NAMES = {'Takanaw', 'Elrenge', 'Kui', 'Lavakaw', 'Lavurase', 'Tingangurucu ', 'Lavausu', 'Muni', 'Balenge', 'Laucu', 'Tanebake', 'Kaku'}
 
 
 class GlossProcessor:
@@ -105,7 +108,7 @@ class GlossProcessor:
 
 
 
-    def search_free(self, tokens: str):
+    def search_free(self, tokens: str, regex=False):
 
         # Parse into a list of tokens
         if ',' in tokens:
@@ -123,8 +126,12 @@ class GlossProcessor:
                 # Check all tokens presented in gloss
                 matched_num = 0
                 for tk in tokens:
-                    if tk in free_content:
-                        matched_num += 1
+                    if regex:
+                        if re.search(tk, free_content):
+                            matched_num += 1
+                    else:
+                        if tk in free_content:
+                            matched_num += 1
                 if matched_num == len(tokens):
                     matched_glosses.append({
                         'file': doc_id,
@@ -182,32 +189,20 @@ def process_doc(fp="corp/20200325.docx"):
 
 def assign_gloss_free_lines(gloss):
     
-    free_lines = [ [], [], [] ]
+    free_lines = []
     gloss_lines = []
     
     for lid, l in enumerate(gloss.copy()):
+        # Skip empty lines
+        if l == '': continue
 
-        # Assign free lines
+        # Assign Gloss/Free lines
         if l.startswith('#'):
-            if l.startswith('#e'):
-                free_lines[0].append(l)
-            elif l.startswith('#c'):
-                free_lines[1].append(l)
-            elif l.startswith('#n'):
-                free_lines[2].append(l)
-            else:
-                # Deal with typos
-                logging.info(f'Free line(s) missing `e`, `c`, or `n` after `#`!: {l}')
-                for i, fl in enumerate(free_lines):
-                    if fl == []:
-                        free_lines[i].append(l)
-                        break
-
-        # Assign gloss lines
-        if not (l.startswith('#') or l == ''):
+            free_lines.append(l)
+        else:
             gloss_lines.append(l)
 
-    return gloss_lines, ['\n'.join(l) for l in free_lines]
+    return gloss_lines, free_lines # ['\n'.join(l) for l in free_lines]
 
 
 
@@ -264,8 +259,13 @@ def tokenize_glosses(glosses, filname):
             else:
                 zh = zh_gloss[i]
 
+            # Normalize Capital letter
+            if i == 0 and rk[0].isupper():
+                global PERSON_NAMES
+                if rk not in PERSON_NAMES:
+                    rk = rk[0].lower() + rk[1:]
+
             gloss.append( (rk, en, zh) )
-        
 
         # Save data
         parsed_glosses.append(
@@ -295,10 +295,15 @@ def get_files_timestamp(dir):
 
 
 if __name__ == "__main__":
-    import json
+    GDRIVE_URL = 'https://drive.google.com/drive/folders/1vnS6szldLPlLu09c_01eqTNzt0Rs-fJ8'
+    DOCX_FOLDER_PATH = r'2020_Budai_Rukai/'
+
     logging.basicConfig(level=logging.INFO)
 
-    DOCX_FOLDER_PATH = r'/home/liao/Desktop/gloss-data/'
+    # Download from GDrive
+    cmd = f'curl gdrive.sh | bash -s {GDRIVE_URL}'
+    os.system(cmd)
+
     os.chdir(DOCX_FOLDER_PATH)
     DOCX_FOLDER_PATH = pathlib.Path('.')
 
