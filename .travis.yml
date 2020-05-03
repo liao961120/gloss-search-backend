@@ -19,7 +19,7 @@ script:
   - python3 GlossProcessor.py
 
 before_deploy:
-  - rm -r .gitignore *.sh *.py *.md *.txt Dockerfile
+  - rm -r *.sh *.py *.md *.txt Dockerfile .*
 
 deploy:
   provider: pages
