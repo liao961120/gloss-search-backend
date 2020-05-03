@@ -16,10 +16,10 @@ cache:
 
 # command to run tests
 script:
-  - python3 GlossProcessor.py
+  - python3 GlossProcessor.py $2020_Budai_Rukai_URL
 
 before_deploy:
-  - rm -r *.sh *.py *.md *.txt Dockerfile .gitignore .travis.yml .dockerignore
+  - rm -r *.sh *.py *.md *.txt Dockerfile .gitignore .travis.yml .dockerignore curl_gdrive.log
 
 deploy:
   provider: pages

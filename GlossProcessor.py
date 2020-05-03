@@ -1,5 +1,6 @@
 import os
 import re
+import sys
 import json
 import pathlib
 import logging
@@ -61,7 +62,7 @@ class GlossProcessor:
             try:
                 glosses = process_doc(str(fp))
             except:
-                logging.warning(f"Invalid formatting in docx: `{fp}`")
+                logging.warning(f"`{fp}`: invalid FILE format")
                 continue
             self.data[str(fp)] = tokenize_glosses(glosses, str(fp))
 
@@ -218,7 +219,7 @@ def tokenize_glosses(glosses, filname):
         num_of_lines = len(gloss_lines) 
 
         if num_of_lines % 3 != 0 and (num_of_lines - 1) % 3 !=0:
-            logging.warning(f"Invalid gloss formatting: #{glosses[gloss_id][0]} in {filname}")
+            logging.warning(f"#{glosses[gloss_id][0]} in `{filname}`: invalid GLOSS format")
             continue
         
         # Deal with two possible formats: gloss with/without original language
@@ -295,13 +296,13 @@ def get_files_timestamp(dir):
 
 
 if __name__ == "__main__":
-    GDRIVE_URL = 'https://drive.google.com/drive/folders/1vnS6szldLPlLu09c_01eqTNzt0Rs-fJ8'
     DOCX_FOLDER_PATH = r'2020_Budai_Rukai/'
+    GDRIVE_URL = sys.argv[1]
 
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.INFO, filemode='w', filename=f"{DOCX_FOLDER_PATH.strip('/')}.log", format='%(message)s')
 
     # Download from GDrive
-    cmd = f'curl gdrive.sh | bash -s {GDRIVE_URL}'
+    cmd = f'curl gdrive.sh | bash -s {GDRIVE_URL} > curl_gdrive.log'
     os.system(cmd)
 
     os.chdir(DOCX_FOLDER_PATH)
