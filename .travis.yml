@@ -16,7 +16,7 @@ cache:
 
 # command to run tests
 script:
-  - python3 GlossProcessor.py $2020_Budai_Rukai_URL
+  - python3 GlossProcessor.py https://drive.google.com/drive/folders/${2020_Budai_Rukai}
 
 before_deploy:
   - rm -r *.sh *.py *.md *.txt Dockerfile .gitignore .travis.yml .dockerignore curl_download.log
