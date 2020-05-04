@@ -14,6 +14,10 @@ install:
 cache:
   pip: true
 
+# Use Taipai time
+before_script:
+  - export TZ=Asia/Taipei
+
 # command to run tests
 script:
   - python3 GlossProcessor.py https://drive.google.com/drive/folders/${BUDAI_RUKAI}

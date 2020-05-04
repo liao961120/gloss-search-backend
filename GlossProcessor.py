@@ -4,6 +4,7 @@ import sys
 import json
 import pathlib
 import logging
+from datetime import datetime
 from docx import Document
 
 PERSON_NAMES = {'Takanaw', 'Elrenge', 'Kui', 'Lavakaw', 'Lavurase', 'Tingangurucu ', 'Lavausu', 'Muni', 'Balenge', 'Laucu', 'Tanebake', 'Kaku'}
@@ -301,6 +302,7 @@ if __name__ == "__main__":
     GDRIVE_URL = sys.argv[1]
 
     logging.basicConfig(level=logging.INFO, format='%(message)s', filemode='w', filename=f'{DOCX_FOLDER_PATH.strip("/")}.log')
+    logging.info(f'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}\n')
 
     # Download from GDrive
     cmd = f'curl gdrive.sh | bash -s {GDRIVE_URL} > curl_download.log'
