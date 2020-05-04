@@ -62,7 +62,7 @@ class GlossProcessor:
             try:
                 glosses = process_doc(str(fp))
             except:
-                logging.warning(f"`{fp}` #__:  invalid DOCX  formatting")
+                logging.warning(f"{fp} #__:  invalid DOCX  formatting")
                 continue
             self.data[str(fp)] = tokenize_glosses(glosses, str(fp))
 
@@ -220,7 +220,7 @@ def tokenize_glosses(glosses, filname):
         num_of_lines = len(gloss_lines) 
 
         if num_of_lines % 3 != 0 and (num_of_lines - 1) % 3 !=0:
-            logging.warning(f"`{filname}` #{glosses[gloss_id][0]:<2}:  invalid GLOSS formatting")
+            logging.warning(f"{filname} #{glosses[gloss_id][0]:<2}:  invalid GLOSS formatting")
             continue
         
         # Deal with two possible formats: gloss with/without original language
