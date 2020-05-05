@@ -248,9 +248,9 @@ def tokenize_glosses(glosses, filname):
 
         # Check gloss alignment
         if len(rk_gloss) != len(en_gloss):
-            logging.warning(f"{filname} #{glosses[gloss_id][0]:<2}: ALIGNMENT > English gloss line has {'more' if len(rk_gloss) < len(en_gloss) else 'less'} tokens than Original langauge")
+            logging.warning(f"{filname} #{glosses[gloss_id][0]:<2}: ALIGNMENT > English gloss line has {'MORE' if len(rk_gloss) < len(en_gloss) else 'LESS'} tokens than Original langauge")
         if len(rk_gloss) != len(zh_gloss):
-            logging.warning(f"{filname} #{glosses[gloss_id][0]:<2}: ALIGNMENT > Chinese gloss line has {'more' if len(rk_gloss) < len(zh_gloss) else 'less'} tokens than Original langauge")
+            logging.warning(f"{filname} #{glosses[gloss_id][0]:<2}: ALIGNMENT > Chinese gloss line has {'MORE' if len(rk_gloss) < len(zh_gloss) else 'LESS'} tokens than Original langauge")
         
         # Tokenize
         gloss = []
