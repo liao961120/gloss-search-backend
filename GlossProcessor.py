@@ -341,3 +341,33 @@ if __name__ == "__main__":
     # Write to json
     with open("data.json", "w", encoding="utf-8") as f:
         json.dump(output_glosses, f, ensure_ascii=False)
+
+
+    #-------- Get glossary --------#
+    glossary = {}
+    for gloss in data:
+        id_ = f"{gloss['file']}#{gloss['num']}"
+
+        gloss_set = { '=00000='.join(tup) for tup in gloss['gloss'] }
+
+        for tk in [x.split('=00000=') for x in gloss_set]:
+            
+            # Normalize token pattern
+            tk = [ t.strip('()/*?+-_,!.1234567890[]') for t in tk ]
+            tk[0] = tk[0].lower()
+            if tk[0] in [''] + list(PERSON_NAMES): continue
+            
+            sense = ' | '.join(tk[1:])
+            if tk[0] not in glossary:
+                glossary[tk[0]] = {
+                    sense: [id_],
+                }
+            else:
+                if sense not in glossary[tk[0]]:
+                    glossary[tk[0]][sense] = [id_]
+                else:
+                    glossary[tk[0]][sense].append(id_)
+
+
+    with open('glossary.json', 'w') as f:
+        json.dump([(k,glossary[k]) for k in sorted(glossary.keys())], f, ensure_ascii=False)
