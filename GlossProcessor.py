@@ -345,7 +345,7 @@ if __name__ == "__main__":
 
     #-------- Get glossary --------#
     glossary = {}
-    for gloss in data:
+    for gloss in output_glosses:
         id_ = f"{gloss['file']}#{gloss['num']}"
 
         gloss_set = { '=00000='.join(tup) for tup in gloss['gloss'] }
