@@ -368,6 +368,24 @@ if __name__ == "__main__":
                 else:
                     glossary[tk[0]][sense].append(id_)
 
+    # Sort and index for search
+    sorted_glossary = []
+    for k in sorted(glossary.keys()):
+        
+        tokens = set()
+
+        # Add lexical entry
+        tokens.add(k)
+        tokens.add(k.replace('-', ''))
+
+        # Add sense
+        for sense in glossary[k]:
+            for tk in sense.split('|'):
+                tokens.add(tk.strip())
+
+        # Save sorted gloss
+        sorted_glossary.append( (k, glossary[k], list(tokens)) )
+
 
     with open('glossary.json', 'w') as f:
-        json.dump([(k,glossary[k]) for k in sorted(glossary.keys())], f, ensure_ascii=False)
+        json.dump(sorted_glossary, f, ensure_ascii=False)
