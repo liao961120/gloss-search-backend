@@ -357,7 +357,9 @@ if __name__ == "__main__":
             tk[0] = tk[0].lower()
             if tk[0] in [''] + list(PERSON_NAMES): continue
             
-            sense = ' | '.join(tk[1:])
+            sense = ' | '.join(t.strip() for t in tk[1:] if t.strip() != '')
+            if sense == '': continue
+            
             if tk[0] not in glossary:
                 glossary[tk[0]] = {
                     sense: [id_],
