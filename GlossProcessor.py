@@ -59,8 +59,10 @@ class GlossProcessor:
 
     def _load_data(self, path):
         path = pathlib.Path(path)
+        exts = {'.docx', '.txt'}
         
-        for fp in path.rglob('*.docx'):
+        for fp in path.rglob('*'):
+        	if path.suffix not in exts: continue
             try:
                 glosses = process_doc(str(fp))
             except:
@@ -337,10 +339,14 @@ if __name__ == "__main__":
 
     # Format docx filename
     pat_fn = re.compile(r'\d{4,}')
-    for fp in list(DOCX_FOLDER_PATH.rglob('*.docx')) + list(DOCX_FOLDER_PATH.rglob('*.txt')):
+    for fp in DOCX_FOLDER_PATH.rglob('*'):
+    	if fp.suffix not in {'.docx', '.txt'}: continue
         new_fn = pat_fn.search(str(fp))
         if new_fn:
-            new_fp = str(fp).replace(fp.name, f"{new_fn[0]}.docx")
+        	if str(fp).endswith('.docx'):
+            	new_fp = str(fp).replace(fp.name, f"{new_fn[0]}.docx")
+        	else:
+        		new_fp = str(fp).replace(fp.name, f"{new_fn[0]}.txt")
             os.rename(str(fp), new_fp)
 
 
