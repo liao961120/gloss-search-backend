@@ -10,6 +10,8 @@ branches:
 
 install:
   - pip install python-docx
+  - pip install chardet
+  - pip install beautifulsoup4
 
 cache:
   pip: true
