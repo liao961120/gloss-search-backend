@@ -62,11 +62,11 @@ class GlossProcessor:
         exts = {'.docx', '.txt'}
         
         for fp in path.rglob('*'):
-            if path.suffix not in exts: continue
+            if fp.suffix not in exts: continue
             try:
                 glosses = process_doc(str(fp))
             except:
-                logging.warning(f"{fp} #__:  invalid DOCX  formatting")
+                logging.warning(f"{fp} #__:  invalid DOCX formatting")
                 continue
             self.data[str(fp)] = tokenize_glosses(glosses, str(fp))
 
