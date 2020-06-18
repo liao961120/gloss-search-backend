@@ -6,6 +6,7 @@ import pathlib
 import logging
 from datetime import datetime
 from docx import Document
+from bs4 import UnicodeDammit
 
 PERSON_NAMES = {'Takanaw', 'Elrenge', 'Kui', 'Lavakaw', 'Lavurase', 'Tingangurucu ', 'Lavausu', 'Muni', 'Balenge', 'Laucu', 'Tanebake', 'Kaku'}
 
@@ -152,9 +153,15 @@ class GlossProcessor:
 def process_doc(fp="corp/20200325.docx"):
 
     # Normalize document into a list of lines
-    d = Document(fp)
-    a_doc = '\n'.join(p.text for p in d.paragraphs)
-    a_doc = a_doc.split('\n')
+    if str(fp).endswith('.docx'):
+        d = Document(fp)
+        a_doc = '\n'.join(p.text for p in d.paragraphs)
+        a_doc = a_doc.split('\n')
+    elif str(fp).endswith('.txt'):
+        a_doc, enc = read_with_guessed_encoding(fp)
+        a_doc = a_doc.split('\n')
+    else:
+        raise Exception("Unsupported format. Please provide `.docx` or `.txt`")
 
     # Find the positions of each elicitation
     pat_start = re.compile("^(\d{1,2})\.\s*$")
@@ -303,6 +310,17 @@ def get_files_timestamp(dir):
 
 
 
+def read_with_guessed_encoding(fp: str):
+    with open(fp, 'rb') as file:
+       content = file.read()
+    suggestion = UnicodeDammit(content)
+    guessed_enc = suggestion.original_encoding
+
+    with open(fp, 'r', encoding=guessed_enc) as f:
+        return f.read(), guessed_enc
+
+
+
 if __name__ == "__main__":
     DOCX_FOLDER_PATH = r'2020_Budai_Rukai/'
     GDRIVE_URL = sys.argv[1]
@@ -319,7 +337,7 @@ if __name__ == "__main__":
 
     # Format docx filename
     pat_fn = re.compile(r'\d{4,}')
-    for fp in DOCX_FOLDER_PATH.rglob('*.docx'):
+    for fp in list(DOCX_FOLDER_PATH.rglob('*.docx')) + list(DOCX_FOLDER_PATH.rglob('*.txt')):
         new_fn = pat_fn.search(str(fp))
         if new_fn:
             new_fp = str(fp).replace(fp.name, f"{new_fn[0]}.docx")
