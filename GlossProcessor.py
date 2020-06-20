@@ -188,12 +188,25 @@ def process_doc(fp="corp/20200325.docx"):
                 break
     glosses_on.append( (gloss_num_old, i) )
 
+    # Parse metadata
+    meta = {
+        'speaker': '',
+        'modified': '',
+    }
+    # Get speaker
+    for line in a_doc:
+        if line.startswith('Speaker'):
+            meta['speaker'] = line.replace('Speaker', '').strip(':： ').strip()
+    # Get last modified time
+    ts = os.path.getmtime(str(fp))
+    meta['modified'] = datetime.utcfromtimestamp(ts).strftime('%Y-%m-%d')
+
     # Get all elicitations in the document
     glosses = []
     for start, end in glosses_on:
         gloss_num = int(re.match("(\d+)\.", a_doc[start])[1])
         gloss_lines = [ l.strip() for l in a_doc[(start + 1):end] ]
-        glosses.append( (gloss_num, gloss_lines) )
+        glosses.append( (gloss_num, gloss_lines, meta) )
     
     return glosses
 
@@ -292,7 +305,8 @@ def tokenize_glosses(glosses, filname):
             {
             'ori': ori_lang,
             'gloss': gloss,
-            'free': [l for l in free_lines if l != '']
+            'free': [l for l in free_lines if l != ''],
+            'meta': glosses[gloss_id][2]
             }
            )
         )
