@@ -193,12 +193,15 @@ def process_doc(fp="corp/20200325.docx"):
     meta = {
         'speaker': '',
         'modified': '',
+        'transcriber': '',
         'audio': '',
     }
     # Get speaker
     for line in a_doc:
-        if line.startswith('Speaker'):
-            meta['speaker'] = line.replace('Speaker', '').strip(':： ').strip()
+        if line.lower().startswith('speaker'):
+            meta['speaker'] = line.lower().replace('speaker', '').strip(':： ').strip()
+        elif line.lower().startswith('transcribed by'):
+            meta['transcriber'] = line.lower().replace('transcribed by', '').strip(':： ').strip()
     # Get last modified time
     ts = os.path.getmtime(str(fp))
     meta['modified'] = datetime.utcfromtimestamp(ts).strftime('%Y-%m-%d')
@@ -212,19 +215,8 @@ def process_doc(fp="corp/20200325.docx"):
         # Check audio in one gloss
         for i, line in enumerate(gloss_lines.copy()):
             if line.startswith('#a'):
-                # Parse line to audio url
-                audio_data = line.replace('#a', '').strip().split()
-                
-                url = urlparse(audio_data[0])
-                start_time = parse_audio_time(audio_data[1])
-                if url.netloc != 'drive.google.com' or start_time is None:
-                    logging.warning(f"{str(fp)}#{gloss_num}: invalid audio format")
-                
-                file_id = url.path.replace('view', '').replace('file', '').replace('d', '').strip('/')
-                new_url = f"https://drive.google.com/uc?export=open&id={file_id}#t={start_time}"
-
                 # Add audio url to meta
-                meta['audio'] = new_url
+                meta['audio'] = parse_audio(line)
                 break
 
         glosses.append( (gloss_num, gloss_lines, meta.copy()) )
@@ -232,6 +224,39 @@ def process_doc(fp="corp/20200325.docx"):
     
     return glosses
 
+
+def parse_audio(line: str):
+    # Parse data
+    url = re.search(r'\b(https?://\S+)', line)
+    start_time = re.search(r'\b\d{1,2}:\d{1,2}(:\d{1,2})?\b', line)
+    if url is None or start_time is None:
+        logging.warning(f"{str(fp)}#{gloss_num}: invalid audio format")
+        return ''
+    url, start_time = url[0], start_time[0]
+    
+    # Normalize start time format
+    start_time = ':'.join([x.zfill(2) for x in start_time.split(':')])
+    
+    # Check URL Location
+    url = urlparse(url)
+    if url.netloc != 'drive.google.com':
+        logging.warning(f"{str(fp)}#{gloss_num}: audio url not from https://drive.google.com")
+        return ''
+    
+    # Create new url
+    file_id = url.path.replace('view', '').replace('file', '').replace('d', '').strip('/')
+    new_url = f"https://drive.google.com/uc?export=open&id={file_id}#t={start_time}"
+
+    # Return new url as str
+    return new_url
+
+
+def parse_audio_time(time_str: str):
+    time_str = time_str.strip()
+    if not re.match('^\d{1,2}:\d{1,2}(:\d{1,2})?$', time_str):
+        return None
+    else:
+        return ':'.join([f.zfill(2) for f in time_str.split(':')])
 
 
 def assign_gloss_free_lines(gloss):
@@ -335,13 +360,6 @@ def tokenize_glosses(glosses, filname):
     
     return parsed_glosses
 
-
-def parse_audio_time(time_str: str):
-    time_str = time_str.strip()
-    if not re.match('^\d{1,2}:\d{1,2}(:\d{1,2})?$', time_str):
-        return None
-    else:
-        return ':'.join([f.zfill(2) for f in time_str.split(':')])
 
 
 def get_files_timestamp(dir):

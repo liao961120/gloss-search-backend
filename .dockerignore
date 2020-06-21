@@ -4,6 +4,7 @@ __pycache__
 corp
 test-corp
 *.ipynb
+test.py
 
 .travis.yml
 *Dockerfile*
