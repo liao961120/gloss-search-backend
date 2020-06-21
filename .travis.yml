@@ -9,7 +9,7 @@ branches:
     - master
 
 install:
-  - pip install python-docx
+  - pip install https://github.com/liao961120/python-docx/archive/master.zip
   - pip install chardet
   - pip install beautifulsoup4
 

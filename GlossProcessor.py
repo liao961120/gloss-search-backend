@@ -5,6 +5,7 @@ import json
 import pathlib
 import logging
 from datetime import datetime
+from urllib.parse import urlparse
 from docx import Document
 from bs4 import UnicodeDammit
 
@@ -186,12 +187,13 @@ def process_doc(fp="corp/20200325.docx"):
             if len(a_doc) == i + 1 or (not a_doc[i + 1].strip().startswith('#')):
                 end_idx = i + 1
                 break
-    glosses_on.append( (gloss_num_old, i) )
+    glosses_on.append( (gloss_num_old, end_idx) )
 
     # Parse metadata
     meta = {
         'speaker': '',
         'modified': '',
+        'audio': '',
     }
     # Get speaker
     for line in a_doc:
@@ -206,7 +208,27 @@ def process_doc(fp="corp/20200325.docx"):
     for start, end in glosses_on:
         gloss_num = int(re.match("(\d+)\.", a_doc[start])[1])
         gloss_lines = [ l.strip() for l in a_doc[(start + 1):end] ]
-        glosses.append( (gloss_num, gloss_lines, meta) )
+
+        # Check audio in one gloss
+        for i, line in enumerate(gloss_lines.copy()):
+            if line.startswith('#a'):
+                # Parse line to audio url
+                audio_data = line.replace('#a', '').strip().split()
+                
+                url = urlparse(audio_data[0])
+                start_time = parse_audio_time(audio_data[1])
+                if url.netloc != 'drive.google.com' or start_time is None:
+                    logging.warning(f"{str(fp)}#{gloss_num}: invalid audio format")
+                
+                file_id = url.path.replace('view', '').replace('file', '').replace('d', '').strip('/')
+                new_url = f"https://drive.google.com/uc?export=open&id={file_id}#t={start_time}"
+
+                # Add audio url to meta
+                meta['audio'] = new_url
+                break
+
+        glosses.append( (gloss_num, gloss_lines, meta.copy()) )
+        meta['audio'] = ''
     
     return glosses
 
@@ -219,7 +241,7 @@ def assign_gloss_free_lines(gloss):
     
     for lid, l in enumerate(gloss.copy()):
         # Skip empty lines
-        if l == '': continue
+        if l == '' or l.startswith('#a'): continue
 
         # Assign Gloss/Free lines
         if l.startswith('#'):
@@ -313,6 +335,13 @@ def tokenize_glosses(glosses, filname):
     
     return parsed_glosses
 
+
+def parse_audio_time(time_str: str):
+    time_str = time_str.strip()
+    if not re.match('^\d{1,2}:\d{1,2}(:\d{1,2})?$', time_str):
+        return None
+    else:
+        return ':'.join([f.zfill(2) for f in time_str.split(':')])
 
 
 def get_files_timestamp(dir):
