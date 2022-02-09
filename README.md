@@ -1,4 +1,4 @@
-![example workflow](https://github.com/liao961120/gloss-search/actions/workflows/<WORKFLOW_FILE>/badge.svg)
+![example workflow](https://github.com/liao961120/gloss-search/actions/workflows/main.yml/badge.svg)
 
 # gloss-search
 
