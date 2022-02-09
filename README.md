@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/liao961120/gloss-search.svg?branch=master)](https://travis-ci.org/liao961120/gloss-search)
+![example workflow](https://github.com/liao961120/gloss-search/actions/workflows/<WORKFLOW_FILE>/badge.svg)
 
 # gloss-search
 
