@@ -22,7 +22,7 @@ jobs:
         sudo timedatectl set-timezone Asia/Taipei
         pip install -r requirements.txt
         python3 GlossProcessor.py ${{ secrets.GDURL2022 }}
-        cp -r 2022_LANG 2022_LANG.log archive/
+        cp -r 202* archive/
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
