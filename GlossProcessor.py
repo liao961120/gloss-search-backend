@@ -385,7 +385,7 @@ def read_with_guessed_encoding(fp: str):
 
 
 if __name__ == "__main__":
-    DOCX_FOLDER_PATH = r'2020_Budai_Rukai/'
+    DOCX_FOLDER_PATH = r'2022_LANG/'  # 2020_Budai_Rukai/
     GDRIVE_URL = sys.argv[1]
 
     logging.basicConfig(level=logging.INFO, format='%(message)s', filemode='w', filename=f'{DOCX_FOLDER_PATH.strip("/")}.log')
@@ -425,7 +425,7 @@ if __name__ == "__main__":
     
     # Write to json
     with open("data.json", "w", encoding="utf-8") as f:
-        json.dump(output_glosses, f, ensure_ascii=False)
+        json.dump(output_glosses, f, ensure_ascii=False, separators=(',', ':'))
 
 
     #-------- Get glossary --------#
@@ -475,4 +475,4 @@ if __name__ == "__main__":
 
 
     with open('glossary.json', 'w') as f:
-        json.dump(sorted_glossary, f, ensure_ascii=False)
+        json.dump(sorted_glossary, f, ensure_ascii=False, separators=(',', ':'))

@@ -1,4 +1,3 @@
-*.docx
 *.doc
 *.ipynb
 *.zip
@@ -8,6 +7,3 @@ test-corp
 test*
 curl_download.log
 BUDAI_RUKAI
-2020_Budai_Rukai
-2020_Budai_Rukai.log
-*.json
