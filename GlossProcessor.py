@@ -385,7 +385,7 @@ def read_with_guessed_encoding(fp: str):
 
 
 if __name__ == "__main__":
-    DOCX_FOLDER_PATH = r'2022_LANG/'  # 2020_Budai_Rukai/
+    DOCX_FOLDER_PATH = sys.argv[2]  # 2020_Budai_Rukai/
     GDRIVE_URL = sys.argv[1]
 
     logging.basicConfig(level=logging.INFO, format='%(message)s', filemode='w', filename=f'{DOCX_FOLDER_PATH.strip("/")}.log')
