@@ -385,6 +385,7 @@ def read_with_guessed_encoding(fp: str):
 
 
 if __name__ == "__main__":
+    from gdown import download_folder
     DOCX_FOLDER_PATH = sys.argv[2]  # 2020_Budai_Rukai/
     GDRIVE_URL = sys.argv[1]
 
@@ -392,8 +393,9 @@ if __name__ == "__main__":
     logging.info(f'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}\n')
 
     # Download from GDrive
-    cmd = f'curl gdrive.sh | bash -s {GDRIVE_URL} > curl_download.log'
-    os.system(cmd)
+    # cmd = f'curl gdrive.sh | bash -s {GDRIVE_URL} > curl_download.log'
+    # os.system(cmd)
+    download_folder(id=GDRIVE_URL)
 
     os.chdir(DOCX_FOLDER_PATH)
     DOCX_FOLDER_PATH = pathlib.Path('.')
